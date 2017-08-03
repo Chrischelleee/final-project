@@ -180,7 +180,8 @@ function displayQuestion(id) {
         b1text.setAttribute("color", "black")
         document.getElementById("entity").appendChild(b1text)
         b1.setAttribute("id", answer(particularOptions[0]))
-        b1.setAttribute("onclick", `isCorrect(${b1.getAttribute('id')})`)
+        var a = answer(particularOptions[0])
+        b1.setAttribute("onclick", `isCorrect(${a})`)
 
         b2text.setAttribute("value", particularOptions[1])
         b2text.setAttribute("position", "-2.2 0.5 -3")
