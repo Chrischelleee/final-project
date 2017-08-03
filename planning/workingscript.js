@@ -1,6 +1,6 @@
 var gilmoreGirls = {
     title: "Gilmore Girls",
-    pictureLink: "http://img.cinemablend.com/cb/0/6/f/5/6/b/06f56b2f6c6b033298d4a77f60a484c62146d5e1ddede6ad43699163d8234023.jpg",
+    pictureLink: "gilmoregirls.jpg",
     quote: "Oy with the poodle's already."
 }
 
@@ -15,7 +15,6 @@ var theOriginals = {
     pictureLink: "theoriginals.jpg",
     quote: "Always and forever. Family above all."
 }
-
 var netflixshows = [gilmoreGirls,greysAnatomy,theOriginals]
 console.log(netflixshows)
 function shuffle(array) {
@@ -30,22 +29,79 @@ function shuffle(array) {
 }
 arr=shuffle(netflixshows)
 console.log(arr)
-//console.log(gilmoreGirls.title)
-function idname(object){
+function idnam(object){
    return (object.title).replace(/\s/g, '')
 }
+function idname(object){
+  return (idnam(object)).toLowerCase()
+}
 console.log(idname(theOriginals))
+var show=arr[1]
+var listofshows = ["Criminal Minds",
+"How To Get Away With Murder",
+"Stranger Things",
+"Orange Is The New Black",
+"Fuller House",
+"13 Reasons Why",
+"The Office",
+"Breaking Bad",
+"Malcolm In The Middle",
+"Scandal",
+"Pretty Little Liars",
+"Vampire Diaries",
+"The Originals",
+"Riverdale",
+"Glee",
+"Shameless",
+"Law & Order",
+"The Flash",
+"The Originals",
+"Hannah Montana",
+"Grey's Anatomy"]
 
-var show
+function createQuestion(){
+Array.prototype.getRandom= function(num, cut){
+    var A= cut? this:this.slice(0);
+    A.sort(function(){
+        return .5-Math.random();
+    });
+    return A.splice(0, num);
+}
+listofshows.getRandom(3)
+function isShow(obj) {
+  return (obj != show.title)
+}
+var noShow = listofshows.filter(isShow)
+var option=noShow.getRandom(3)
+var ans=[show.title]
+var choices=option.push(show.title)
+var options=shuffle(option)
+return options
+}
+
+
+// onclick is correct if show title is equal to options
+//return string correct if true and incorrect if false
+function answer(choices){
+    if (choices == show.title){
+      return "correct"
+    }
+    else if (choices != show.title) {
+      return "incorrect"
+    }
+}
+
 var ent = document.createElement("a-entity")
+var assets = document.createElement("a-assets")
 
 function displayQuestion(id) {
+    var particularOptions = createQuestion()
+    console.log(particularOptions)
     ent.setAttribute("id", "entity")
     document.getElementById("scene").appendChild(ent)
+    assets.setAttribute("id","assets")
+    document.getElementById("scene").appendChild(assets)
 
-    //create plane
-    //set attributes
-    //append to entity
     var plane = document.createElement("a-plane")
     plane.setAttribute("color", "lightblue")
     plane.setAttribute("width", "10")
@@ -54,8 +110,6 @@ function displayQuestion(id) {
     plane.setAttribute("id", "plane")
     document.getElementById("entity").appendChild(plane)
 
-    //create image
-    //append to assets
     var img = document.createElement("img")
     var imagePlane = document.createElement("a-plane")
     var title = document.createElement("a-text")
@@ -103,12 +157,7 @@ function displayQuestion(id) {
     document.getElementById("entity").appendChild(b4)
     var b4text = document.createElement("a-text")
 
-
-    if (id == "circle1") {
-        var circle = document.getElementById("circle1")
-        circle.setAttribute("visible", "false")
         ent.setAttribute("visible","true")
-        show = theOriginals
         title.setAttribute("value", "What is this show?")
         title.setAttribute("position", "-1 5 -5")
         title.setAttribute("color", "black")
@@ -119,88 +168,66 @@ function displayQuestion(id) {
         img.setAttribute("id", idname(show))
         document.getElementById("assets").appendChild(img)
 
-        imagePlane.setAttribute("material", "src:#" + idname(show))
+        imagePlane.setAttribute("src", "#" + idname(show))
         imagePlane.setAttribute("width", "5")
         imagePlane.setAttribute("height", "3")
         imagePlane.setAttribute("position", "0 3 -5")
         document.getElementById("entity").appendChild(imagePlane)
-        var plane = document.createElement("a-plane")
 
-        b1text.setAttribute("value", "The Vampire Diaries")
+
+        b1text.setAttribute("value", particularOptions[0])
         b1text.setAttribute("position", "-2.4 1.2 -3")
         b1text.setAttribute("color", "black")
         document.getElementById("entity").appendChild(b1text)
+        b1.setAttribute("id", answer(particularOptions[0]))
+        b1.setAttribute("onclick", `isCorrect(${b1.getAttribute('id')})`)
 
-        b2text.setAttribute("value", show.title)
+        b2text.setAttribute("value", particularOptions[1])
         b2text.setAttribute("position", "-2.2 0.5 -3")
         b2text.setAttribute("color", "black")
         document.getElementById("entity").appendChild(b2text)
-        b2.setAttribute("id", "correct")
-        b2.setAttribute("onclick", "isCorrect('correct')")
+        b2.setAttribute("id", answer(particularOptions[1]))
+        var b = b2.getAttribute("id")
+        b2.setAttribute("onclick", `isCorrect(${b}`)
 
-        b3text.setAttribute("value", "Being Human")
+        b3text.setAttribute("value", particularOptions[2])
         b3text.setAttribute("position", "0.7 1.2 -3")
         b3text.setAttribute("color", "black")
         document.getElementById("entity").appendChild(b3text)
+        b3.setAttribute("id", answer(particularOptions[2]))
+        b3.setAttribute("onclick", `isCorrect(${b3.getAttribute('id')})`)
 
-        b4text.setAttribute("value", "Twilight")
+        b4text.setAttribute("value", particularOptions[3])
         b4text.setAttribute("position", "1 0.5 -3")
         b4text.setAttribute("color", "black")
         document.getElementById("entity").appendChild(b4text)
-    }
+        b4.setAttribute("id", answer(particularOptions[3]))
+        console.log(b4.id)
+        var c = answer(particularOptions[3])
+        b4.setAttribute("onclick", `isCorrect(${c})`)
 }
-
-//     else if(id == "circle2"){
-//         var circle2 = document.getElementById("circle2")
-//         circle2.setAttribute("visible", "false")
-//         show = gilmoreGirls
-//         title.setAttribute("value", "What is this show?")
-//         title.setAttribute("position", "-1 5 -5")
-//         title.setAttribute("color", "black")
-//         title.setAttribute("font-weight", "bold")
-//         document.getElementById("entity").appendChild(title)
-
-//         img.setAttribute("src", show.pictureLink)
-//         img.setAttribute("id", "gg")
-//         document.getElementById("assets").appendChild(img)
-
-//         imagePlane.setAttribute("material", "src:#gg")
-//         imagePlane.setAttribute("width", "5")
-//         imagePlane.setAttribute("height", "3")
-//         imagePlane.setAttribute("position", "0 3 -5")
-//         document.getElementById("entity").appendChild(imagePlane)
-//         var plane = document.createElement("a-plane")
-
-//         b1text.setAttribute("value", "The Vampire Diaries")
-//         b1text.setAttribute("position", "-2.4 1.2 -3")
-//         b1text.setAttribute("color", "black")
-//         document.getElementById("entity").appendChild(b1text)
-
-//         b2text.setAttribute("value", "The Originals")
-//         b2text.setAttribute("position", "-2.2 0.5 -3")
-//         b2text.setAttribute("color", "black")
-//         document.getElementById("entity").appendChild(b2text)
-//         b2.setAttribute("id", "correct")
-//         b2.setAttribute("onclick", "isCorrect('correct')")
-
-//         b3text.setAttribute("value", "Being Human")
-//         b3text.setAttribute("position", "0.7 1.2 -3")
-//         b3text.setAttribute("color", "black")
-//         document.getElementById("entity").appendChild(b3text)
-
-//         b4text.setAttribute("value", "Twilight")
-//         b4text.setAttribute("position", "1 0.5 -3")
-//         b4text.setAttribute("color", "black")
-//         document.getElementById("entity").appendChild(b4text)
+//circle id visisble should turn false if correct
+//
+function isCorrect(idval) {
+    console.log(idval)
+    if (idval == "correct") {
+        ent.setAttribute("visible", "false")
+        circle1.setAttribute("visible","false")
+        document.getElementById("circle2").setAttribute("visible","true")
+    }
+    }
+//     else if (idval == "correct") {
+//         console.log(document.getElementById("circle2"))
+//         ent.setAttribute("visible", "false")
+//         document.getElementById("circle3").setAttribute("visible", "true")
 //     }
-
-
+//     else if (idval == "correct3") {
+//         console.log(document.getElementById("circle3"))
+//         ent.setAttribute("visible", "false")
+//     }
 // }
 
-function isCorrect(id) {
-    if (id == "correct") {
-        ent.setAttribute("visible", "false")
-        document.getElementById("circle2").setAttribute("visible", "true")
-    }
-
-}
+//find way to get previous circle to disappear and make new one appear
+//so it reruns each time
+//when answer is incorrect drop 3D barricade door with animation
+//get nicer 3D shapes

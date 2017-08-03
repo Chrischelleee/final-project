@@ -5,7 +5,6 @@
     <title>Netflix Trivia</title>
     <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="workingscript.js"></script>
 </head>
 
 <body>
@@ -17,9 +16,9 @@
             <img id="room" src="creepyroom.jpg">
         </a-assets>
         <a-sky src="#room"></a-sky>
-        <a-circle id="circle1" onclick=displayQuestion("circle1") color="red" radius=".5" position="0 2 -5"></a-circle>
-        <a-circle id="circle2" onclick=displayQuestion("circle2") visible="false" color="yellow" radius=".5" position="2 2 -5"></a-circle>
-        <a-circle id="circle3" onclick=displayQuestion("'circle3") visible="false" color="green" radius=".5" position="0 7 8"></a-circle>
+        <a-circle id='circle1' onclick="displayQuestion('circle1')" color="red" radius=".5" position="0 2 -5"></a-circle>
+        <a-circle id='circle2' onclick=displayQuestion('circle2') visible="false"color="yellow" radius=".5" position="2 2 -5"></a-circle>
+        <a-circle id='circle3' onclick=displayQuestion('circle3') visible="false"color="green" radius=".5" position="0 4 -5"></a-circle>
         
         
         
@@ -36,7 +35,7 @@
 
     </a-scene>
 
-
+<script src="workingscript.js"></script>
 </body>
 
 </html>
