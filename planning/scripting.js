@@ -1,3 +1,25 @@
+var show
+var listofshows = ["Criminal Minds",
+"How To Get Away With Murder",
+"Stranger Things",
+"Orange Is The New Black",
+"Fuller House",
+"13 Reasons Why",
+"The Office",
+"Breaking Bad",
+"Malcolm In The Middle",
+"Scandal",
+"Pretty Little Liars",
+"Vampire Diaries",
+"The Originals",
+"Riverdale",
+"Glee",
+"Shameless",
+"Law & Order",
+"The Flash",
+"The Originals",
+"Hannah Montana",
+"Grey's Anatomy"]
 var gilmoreGirls = {
     title: "Gilmore Girls",
     pictureLink: "gilmoreGirls.jpg",
@@ -15,8 +37,43 @@ var theOriginals = {
     pictureLink: "theoriginals.jpg",
     quote: "Always and forever. Family above all."
 }
-
-var show
+var netflixshows = [gilmoreGirls,greysAnatomy,theOriginals]
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }return array;
+}
+arr=shuffle(netflixshows)
+function idnam(object){
+   return (object.title).replace(/\s/g, '')
+}
+function idname(object){
+  return (idnam(object)).toLowerCase()
+}
+function createQuestion(){
+Array.prototype.getRandom= function(num, cut){
+    var A= cut? this:this.slice(0);
+    A.sort(function(){
+        return .5-Math.random();
+    });
+    return A.splice(0, num);
+}
+function isShow(obj) {
+  return (obj != show.title)
+}
+function options(shows){
+var noShow = listofshows.filter(isShow)
+var option=noShow.getRandom(3)
+var ans=[show.title]
+var choices=option.push(show.title)
+var options=shuffle(option)
+return options
+}
 var ent = document.createElement("a-entity")
 ent.setAttribute("id", "entity")
 var assets = document.createElement("a-assets")
@@ -185,8 +242,8 @@ function displayQuestion(id) {
 
     else if (id == "circle2") {
         show = gilmoreGirls
-        ent.setAttribute("position", "2.5 0.5 -1")
-        ent.setAttribute("rotation", "360 -30 0")
+        ent.setAttribute("position", "2 1 -1")
+        ent.setAttribute("rotation", "360 -35 0")
         ent.setAttribute("visible", "true")
 
         //get circle2 element
@@ -221,11 +278,12 @@ function displayQuestion(id) {
 
         b1text.setAttribute("value", "Gossip Girl")
 
-        b2text.setAttribute("value", "Parenthood")
+        b2text.setAttribute("value", "Hart of Dixie")
+
         b3text.setAttribute("value", "Gilmore Girls")
-        b3.setAttribute("id", "correct2")
-        b3.setAttribute("onclick", "isCorrect('correct2')")
-        b4text.setAttribute("value", "Hart of Dixie")
+        b2.setAttribute("id", "correct2")
+        b2.setAttribute("onclick", "isCorrect('correct2')")
+        b4text.setAttribute("value", "Parenthood")
     }
 
     else if (id == "circle3") {
@@ -263,12 +321,24 @@ function displayQuestion(id) {
         imagePlane.setAttribute("height", "3")
         imagePlane.setAttribute("position", "0 3 -4.8")
 
-        b1text.setAttribute("value", "Grey's Anatomy")
-        b1.setAttribute("id", "correct3")
-        b1.setAttribute("onclick", "isCorrect('correct3')")
-        b2text.setAttribute("value", "Scrubs")
-        b3text.setAttribute("value", "Nurse Jackie")
-        b4text.setAttribute("value", "Call the Midwife")
+        b1text.setAttribute("value", "The Vampire Diaries")
+        b1text.setAttribute("position", "-2.4 1.2 -3")
+        b1text.setAttribute("color", "black")
+
+        b2text.setAttribute("value", "Grey's Anatomy")
+        b2text.setAttribute("position", "-2.2 0.5 -3")
+        b2text.setAttribute("color", "black")
+        b2.setAttribute("id", "correct3")
+        b2.setAttribute("onclick", "isCorrect('correct3')")
+
+        b3text.setAttribute("value", "Being Human")
+        b3text.setAttribute("position", "0.7 1.2 -3")
+        b3text.setAttribute("color", "black")
+
+        b4text.setAttribute("value", "Twilight")
+        b4text.setAttribute("position", "1 0.5 -3")
+        b4text.setAttribute("color", "black")
+
         circle3.setAttribute("value", "false")
     }
 }

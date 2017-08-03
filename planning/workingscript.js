@@ -188,7 +188,7 @@ function displayQuestion(id) {
         b2text.setAttribute("color", "black")
         document.getElementById("entity").appendChild(b2text)
         b2.setAttribute("id", answer(particularOptions[1]))
-        var b = b2.getAttribute("id")
+        var b = answer(particularOptions[1])
         b2.setAttribute("onclick", `isCorrect(${b}`)
 
         b3text.setAttribute("value", particularOptions[2])
@@ -196,7 +196,8 @@ function displayQuestion(id) {
         b3text.setAttribute("color", "black")
         document.getElementById("entity").appendChild(b3text)
         b3.setAttribute("id", answer(particularOptions[2]))
-        b3.setAttribute("onclick", `isCorrect(${b3.getAttribute('id')})`)
+        var d = answer(particularOptions[2])
+        b3.setAttribute("onclick", `isCorrect(${d})`)
 
         b4text.setAttribute("value", particularOptions[3])
         b4text.setAttribute("position", "1 0.5 -3")
@@ -210,10 +211,10 @@ function displayQuestion(id) {
 //circle id visisble should turn false if correct
 //
 function isCorrect(idval) {
-    console.log(idval)
-    if (idval == "correct") {
+    console.log(idval.getAttribute("id"))
+    if (idval.getAttribute("id") == "correct") {
         ent.setAttribute("visible", "false")
-        circle1.setAttribute("visible","false")
+        // circle1.setAttribute("visible","false")
         document.getElementById("circle2").setAttribute("visible","true")
     }
     }
