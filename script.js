@@ -16,6 +16,10 @@ var theOriginals = {
     quote: "Always and forever. Family above all."
 }
 
+var criminalMinds ={
+    title: "Criminal Minds",
+}
+
 var show
 var ent = document.createElement("a-entity")
 ent.setAttribute("id", "entity")
@@ -185,7 +189,7 @@ function displayQuestion(id) {
 
     else if (id == "circle2") {
         show = gilmoreGirls
-        ent.setAttribute("position", "2.5 0.5 -1")
+        ent.setAttribute("position", "2.5 0 -1")
         ent.setAttribute("rotation", "360 -30 0")
         ent.setAttribute("visible", "true")
 
@@ -231,8 +235,8 @@ function displayQuestion(id) {
     else if (id == "circle3") {
         show = greysAnatomy
         console.log(show)
-        ent.setAttribute("position", "2 1 -1")
-        ent.setAttribute("rotation", "360 -35 0")
+        ent.setAttribute("position", "2 2 -5")
+        ent.setAttribute("rotation", "375 0 0")
         ent.setAttribute("visible", "true")
         var circle3 = document.getElementById("circle3")
         circle3.setAttribute("visible", "false")
